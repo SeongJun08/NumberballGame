@@ -19,8 +19,10 @@ int main()
 
 	int chosenNumbers[3];
 	int count = 0;
+	int numbercount = 3;
+	//4자리 숫자야구를 할 수도 있으니 상수로 변환
 
-	while (count < 3)
+	while (count < numbercount)
 	{
 		int randNumber = dis(gen);
 		bool isDuplicate = false;
@@ -41,10 +43,54 @@ int main()
 		}
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < numbercount; i++)
 	{
 		std::cout << chosenNumbers[i] << " ";
 	}
 
-	int guessNum[3];
+	std::cout << "숫자 야구 게임에 오신 것을 환영합니다 이 게임은 3자리 숫자 야구 게임이며 연속된 숫자는 사용하실 수 없습니다 3자리 숫자 중 맞추신 숫자에 따라 다음과 같이 안내해드리고 있습니다\
+		Strike : 숫자도 자리수도 맞다 Ball : 숫자는 맞으나 자리수가 틀리다 Out : 숫자도 자리수도 틀리다 재미있게 플레이해주세요";
+
+	while (true)
+	{
+		int guessNum[3];
+		for (int i = 0; i < numbercount; i++)
+		{
+			std::cin >> guessNum[i];
+		}
+
+		if (guessNum[0] == guessNum[1] || guessNum[0] == guessNum[2] || guessNum[1] == guessNum[2])
+		{
+			std::cout << "연속한 숫자는 사용할 수 없습니다" << std::endl;
+			break;
+		}
+
+
+		int strike = 1;
+
+		//strike
+		for (int i = 0; i < numbercount; i++)
+		{
+			if (chosenNumbers[i] == guessNum[i])
+			{
+				std::cout << strike << "Strike" << " ";
+				strike++;
+			}
+			if (strike == 4)
+			{
+				std::cout << "Congratulation!";
+				return 0;
+			}
+
+			for (int j = 0; j < numbercount; j++)
+			{
+				if (chosenNumbers[i] == guessNum[j])
+				{
+
+				}
+			}
+			
+		}
+
+	}
 }
