@@ -51,6 +51,10 @@ int main()
 	std::cout << "숫자 야구 게임에 오신 것을 환영합니다 이 게임은 3자리 숫자 야구 게임이며 연속된 숫자는 사용하실 수 없습니다 3자리 숫자 중 맞추신 숫자에 따라 다음과 같이 안내해드리고 있습니다\
 		Strike : 숫자도 자리수도 맞다 Ball : 숫자는 맞으나 자리수가 틀리다 Out : 숫자도 자리수도 틀리다 재미있게 플레이해주세요";
 
+	int strike = 0;
+	int ball = 0;
+	int out = 3;
+
 	while (true)
 	{
 		int guessNum[3];
@@ -59,38 +63,44 @@ int main()
 			std::cin >> guessNum[i];
 		}
 
-		if (guessNum[0] == guessNum[1] || guessNum[0] == guessNum[2] || guessNum[1] == guessNum[2])
+		for (int i = 0; i < numbercount; i++)
 		{
-			std::cout << "연속한 숫자는 사용할 수 없습니다" << std::endl;
+			for (int j = 0; j < numbercount; j++)
+			{
+				if (chosenNumbers[i] == guessNum[i])
+				{
+					++strike;
+					break;
+				}
+				else if (chosenNumbers[i] == guessNum[j])
+				{
+					++ball;
+					break;
+				}
+			}
+		}
+		out = out - (strike + ball);
+		if (strike > 0)
+		{
+			std::cout << strike << "Strike" << " ";
+		}
+		if (ball > 0)
+		{
+			std::cout << ball << "Ball" << " ";
+		}
+		if (out > 0)
+		{
+			std::cout << out << "Out" << " ";
+		}
+		if (strike == 3)
+		{
+			std::cout << "Congratulation" << std::endl;
 			break;
 		}
 
-
-		int strike = 1;
-
-		//strike
-		for (int i = 0; i < numbercount; i++)
-		{
-			if (chosenNumbers[i] == guessNum[i])
-			{
-				std::cout << strike << "Strike" << " ";
-				strike++;
-			}
-			if (strike == 4)
-			{
-				std::cout << "Congratulation!";
-				return 0;
-			}
-
-			for (int j = 0; j < numbercount; j++)
-			{
-				if (chosenNumbers[i] == guessNum[j])
-				{
-
-				}
-			}
-			
-		}
-
+		strike = 0;
+		ball = 0;
+		out = 3;
+		
 	}
 }
